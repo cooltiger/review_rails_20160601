@@ -40,4 +40,11 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
+  # logger
+  config.logger = Logger.new("log/development.log", 'daily')
+  config.logger.formatter = proc do |severity, datetime, progname, msg|
+    "[#{datetime.strftime("%Y-%m-%d %H:%M:%S")}] #{severity.rjust(6)} -- : #{String === msg ? msg : msg.inspect}\n"
+  end
+
 end
